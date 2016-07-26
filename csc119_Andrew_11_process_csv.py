@@ -11,7 +11,7 @@ def main():
 
             #[L]oad data file
             if choice == "L":
-                readData(FILENAME)
+                reader = readData(FILENAME)
 
             # [C]ondo prices
             if choice == "C":
@@ -34,7 +34,7 @@ def main():
         except NameError :
             print("Error: You must load the file before any data can be analyzed")
 
-
+# finds the average for price, # of bedrooms, and # of bathrooms
 def average_price(reader):
     price = get_average_price(reader, "price")
     beds = get_average_price(reader, "beds")
@@ -42,7 +42,7 @@ def average_price(reader):
     return "%-35s %10s %-35s %10s %-35s %10s" % ("\nAverage Price:", "$"+str(price), "\nAverage Number of Bedrooms:", beds,\
                                                 "\nAverage Number of Bathrooms:", baths)
 
-
+# returns the average of a column of a given key and data set
 def get_average_price(reader, colunm):
     total = 0
     counter = 0
@@ -52,7 +52,7 @@ def get_average_price(reader, colunm):
     return total // counter
 
 
-
+# creates a new data set with only condos and dumps it into the other two averaging functions to return the averages of just condos
 def average_price_condo(reader):
     condos_reader = list(reader)
     for row in condos_reader:
@@ -60,13 +60,14 @@ def average_price_condo(reader):
             condos_reader.remove(row)
     return average_price(condos_reader)
 
-
+#loads the data set
 def readData(filename):
     data_file = open(filename, "r")
     reader = list(csv.DictReader(data_file))
+    print("Data Loaded")
     return reader
 
-
+# returns the highest and lowest priced properties of the data set
 def find_high_and_low(reader):
     max = 0
     min = 100000
@@ -78,6 +79,7 @@ def find_high_and_low(reader):
             min = int(row["price"])
     return max, min
 
+# promts the users to select an action and returns their choice
 def menu():
     userInput = " "
     while userInput not in "LPACQ":
@@ -86,7 +88,7 @@ def menu():
         userInput = userInput.upper()
     return userInput
 
-
+# prints the name of the program
 def printHeader():
     print("Sacramento Real Estate Data Processor v1.0")
 
