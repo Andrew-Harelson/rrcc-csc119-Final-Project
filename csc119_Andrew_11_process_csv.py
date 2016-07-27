@@ -24,16 +24,16 @@ def main():
             # [P] find hi/lo priced
             if choice == "P":
                 hiLow = find_high_and_low(reader)
-                print("%20s %-10s %20s %-10s " %("\nMost Expensive Property:", hiLow[0], "\nLeast Expensive Property:", hiLow[1]))
+                print("%20s %-10s %20s %-10s " %("\nMost Expensive Property:", "$"+str(hiLow[0]), "\nLeast Expensive Property:", "$"+str(hiLow[1])))
 
             # [Q]uit
             elif choice == "Q":
-                print("ok bye")
+                print("Program End")
                 break
 
         except NameError :
             print("Error: You must load the file before any data can be analyzed")
-
+    
 # finds the average for price, # of bedrooms, and # of bathrooms
 def average_price(reader):
     price = get_average_price(reader, "price")
@@ -65,6 +65,7 @@ def readData(filename):
     data_file = open(filename, "r")
     reader = list(csv.DictReader(data_file))
     print("Data Loaded")
+    data_file.close()
     return reader
 
 # returns the highest and lowest priced properties of the data set
