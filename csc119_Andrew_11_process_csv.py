@@ -62,12 +62,17 @@ def average_price_condo(reader):
 
 #loads the data set
 def readData(filename):
-    data_file = open(filename, "r")
-    reader = list(csv.DictReader(data_file))
-    print("Data Loaded")
-    data_file.close()
-    return reader
+    try:
+        data_file = open(filename, "r")
+        reader = list(csv.DictReader(data_file))
+        print("Data Loaded")
+        return reader
 
+    except FileNotFoundError:
+        print("Data file not found, either it is not in the same directory as the program, or it is miss named (should be " + filename + ")\n")
+
+    finally:
+        data_file.close()
 # returns the highest and lowest priced properties of the data set
 def find_high_and_low(reader):
     max = 0
