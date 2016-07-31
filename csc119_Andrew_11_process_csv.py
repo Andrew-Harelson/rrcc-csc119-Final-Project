@@ -92,6 +92,8 @@ def menu():
         userInput = input(
             "\n\nSelect an Action: \n[L]oad data file \n[P] find hi/lo priced \n[A]verage all properties \n[C]ondo averages: \n[Q]uit\n")
         userInput = userInput.upper()
+        if userInput not in "LPACQ":
+            print("Invalid Input")
     return userInput
 
 # prints the name of the program
